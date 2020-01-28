@@ -3,17 +3,12 @@ import ReactDOM from 'react-dom';
 
 // import SeasonDisplay from './components/SeasonDisplay';
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      lat: null,
-      errorMessage: '',
-    };
-  }
+  state = {
+    lat: null,
+    errorMessage: '',
+  };
 
   componentDidMount() {
-    console.log('My component was rendered to the screen (mounted)');
     this.getLocation();
   }
 
@@ -23,13 +18,8 @@ class App extends React.Component {
 
   getLocation() {
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        console.log(position);
-        this.setState({ lat: position.coords.latitude });
-      },
-      err => {
-        this.setState({ errorMessage: err.message });
-      },
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message }),
     );
   }
 
